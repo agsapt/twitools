@@ -1,0 +1,4 @@
+[submodule "almasaeed2010/AdminLTE"]
+	path = public/themes/AdminLTE 
+	url = https://github.com/almasaeed2010/AdminLTE.git
+	ignore = dirty
