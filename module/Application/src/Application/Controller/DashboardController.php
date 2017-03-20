@@ -14,11 +14,20 @@ use Zend\View\Model\ViewModel;
 use ZendService\Twitter\Twitter;
 use Ags\Controller\AgsController;
 
-class IndexController extends AgsController
+class DashboardController extends AgsController
 {
     public function indexAction()
     {
+        $config = $this->getServiceLocator()->get('Config');
+        $twitter = new Twitter($config['twitter']);
+        $response = $twitter->account->verifyCredentials();
+        if (!$response->isSuccess()) {
+            die('Something is wrong with my credentials!');
+        }
+
+        // Search for something:
+        $response = $twitter->search->tweets('823830117482954752');
         $this->setupLayout('layout/landing');
-        return new ViewModel();
+        return new ViewModel(array('tweets'=>$response->toValue()));
     }
 }

@@ -78,6 +78,20 @@ return array(
             'Application\Controller\Index' => Controller\IndexController::class
         ),
     ),
+    'controller_plugins' => array(
+        'invokables' => array(
+            'AclPlugin' => 'Ags\Controller\Plugin\AclPlugin',
+            'SessionLogger' => 'Ags\Controller\Plugin\SessionLogger',
+            'Utility' => 'Ags\Controller\Plugin\Utility',
+            'Email' => 'AgS\Controller\Plugin\EmailSender',
+        )
+    ),
+    'view_helpers' => array(
+        'invokables'=> array(
+            'config' => 'Ags\View\Helper\ConfigHelper',  
+            'utility' => 'Ags\View\Helper\UtilityHelper', 
+        )
+    ),
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -85,7 +99,9 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
+            'layout/landing' => __DIR__ . '/../view/layout/landing.phtml',
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/breadcrumb'       => __DIR__ . '/../view/layout/partial/breadcrumb.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
